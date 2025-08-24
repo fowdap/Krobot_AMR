@@ -1,0 +1,9 @@
+# Ignore build artifacts
+build/
+log/
+install/
+
+
+
+# IDE files 
+.vscode/

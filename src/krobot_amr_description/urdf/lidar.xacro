@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link
+    name="lidar">
+        <inertial>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <mass
+                value="0.0731251643731806" />
+            <inertia
+                ixx="1.95815794551267E-05"
+                ixy="-1.04017030830761E-07"
+                ixz="-4.2763497444236E-07"
+                iyy="2.4131591923912E-05"
+                iyz="9.38002067110816E-09"
+                izz="4.14254792502033E-05" />
+        </inertial>
+        <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://krobot_amr_description/meshes/lidar.STL" />
+            </geometry>
+            <material
+                name="">
+                <color
+                rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://krobot_amr_description/meshes/lidar.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint
+        name="base_lidar"
+        type="fixed">
+        <origin
+        xyz="0.064292 -0.00044905 0.07548"
+        rpy="0 0 0" />
+        <parent
+        link="base_link" />
+        <child
+        link="lidar" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+</robot>
