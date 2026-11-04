@@ -3,6 +3,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 import os
 from launch_ros.actions import PushRosNamespace
@@ -24,13 +25,24 @@ def generate_launch_description():
     
 
     nav2_yaml = os.path.join(pkg_krobot_amr_navigation, 'config', 'localization.yaml')
-    map_file = os.path.join(pkg_krobot_amr_navigation, 'map', 'maze_map.yaml')
+
+    map_arg = DeclareLaunchArgument(
+        'map',
+        default_value=os.path.join(pkg_krobot_amr_navigation, 'map', 'maze_map.yaml'),
+        description='Full path to the map yaml file to load')
+    rviz_arg = DeclareLaunchArgument(
+        'rviz', default_value='true', choices=['true', 'false'],
+        description='Start RViz2')
+
+    map_file = LaunchConfiguration('map')
 
  
     rviz2_node = Node(
         package="rviz2",
         executable="rviz2",
-        arguments=['-d', rviz_config_path]
+        arguments=['-d', rviz_config_path],
+        parameters=[{'use_sim_time': True}],
+        condition=IfCondition(LaunchConfiguration('rviz'))
     )
 
     map_server_node = Node(
@@ -70,6 +82,8 @@ def generate_launch_description():
 
 
     return LaunchDescription([
+        map_arg,
+        rviz_arg,
         rviz2_node,
         map_server_node,
         nav2_amcl_node,
