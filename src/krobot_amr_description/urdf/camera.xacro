@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link
+    name="camera">
+        <inertial>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <mass
+                value="0.0124907958046173" />
+            <inertia
+                ixx="9.93348703178339E-06"
+                ixy="7.2415518219099E-09"
+                ixz="-3.96859308561871E-09"
+                iyy="1.13565433835609E-06"
+                iyz="1.55628646919018E-08"
+                izz="9.1237412087394E-06" />
+        </inertial>
+        <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://krobot_amr_description/meshes/camera.STL" />
+            </geometry>
+            <material
+                name="">
+                <color
+                rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://krobot_amr_description/meshes/camera.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint
+        name="base_camera"
+        type="fixed">
+        <origin
+        xyz="0.15997 0.00019275 0.017869"
+        rpy="0 0 0" />
+        <parent
+        link="base_link" />
+        <child
+        link="camera" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+    <link name = "left_camera"/>
+    <link name = "right_camera"/>
+    <link name = "rgb_camera"/>
+    <link name = "depth_camera"/>
+
+    <joint
+        name="camera_left_camera"
+        type="fixed">
+        <origin
+        xyz="0 0.0375 0"
+        rpy="-1.57079632679 0.0 -1.57079632679" />
+        <parent
+        link="camera" />
+        <child
+        link="left_camera" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+    <joint
+        name="camera_right_camera"
+        type="fixed">
+        <origin
+        xyz="0 -0.0375 0"
+        rpy="-1.57079632679 0.0 -1.57079632679" />
+        <parent
+        link="camera" />
+        <child
+        link="right_camera" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+    <joint
+        name="camera_rgb_camera"
+        type="fixed">
+        <origin
+        xyz="0 0 0"
+        rpy="0 0.0 0" />
+        <parent
+        link="camera" />
+        <child
+        link="rgb_camera" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+    <joint
+        name="camera_depth_camera"
+        type="fixed">
+        <origin
+        xyz="0 0 0"
+        rpy="0 0.0 0" />
+        <parent
+        link="camera" />
+        <child
+        link="depth_camera" />
+        <axis
+        xyz="0 0 0" />
+    </joint>
+
+
+</robot>

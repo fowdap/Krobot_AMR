@@ -1,0 +1,20 @@
+# Ignore build artifacts
+build/
+log/
+install/
+
+
+
+# IDE files 
+.vscode/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# macOS metadata
+.DS_Store
+
+# TF tree dumps (ros2 run tf2_tools view_frames)
+frames_*.gv
+frames_*.pdf
